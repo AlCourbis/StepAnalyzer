@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     /**Intent declared for service launch**/
     private Intent intent;
 
+
+
     /**************************************************************************************************/
 
     /**
@@ -111,7 +113,13 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(broadcastReceiver, new IntentFilter(ParametersCollection.ACTION_CUSTOM_BROADCAST));
 
         /***Shared Preferences instantiated, user id and button status are updated here***/
-        mPreferences = getSharedPreferences(ParametersCollection.sharedPrefFile, MODE_PRIVATE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Context directBootContext = MainActivity.this.createDeviceProtectedStorageContext();
+            mPreferences = directBootContext.getSharedPreferences(ParametersCollection.sharedPrefFile, MODE_PRIVATE);
+        }
+        else {
+            mPreferences = getSharedPreferences(ParametersCollection.sharedPrefFile, MODE_PRIVATE);
+        }
         id = mPreferences.getString("ID", id);
         dailyTracker = mPreferences.getBoolean("DailyTracker", dailyTracker);
         btnText = mPreferences.getString("BtnText", btnText);

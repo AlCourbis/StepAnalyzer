@@ -6,6 +6,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -177,7 +178,13 @@ public class DailyStepService extends Service implements SensorEventListener {
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         /***Instantiate the Shared Preference and get the user ID from it***/
-        prefs = getSharedPreferences(ParametersCollection.sharedPrefFile, MODE_PRIVATE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Context directBootContext = this.createDeviceProtectedStorageContext();
+            prefs = directBootContext.getSharedPreferences(ParametersCollection.sharedPrefFile, MODE_PRIVATE);
+        }
+        else {
+            prefs = getSharedPreferences(ParametersCollection.sharedPrefFile, MODE_PRIVATE);
+        }
         ID = prefs.getString("ID", ID);
     }
 
