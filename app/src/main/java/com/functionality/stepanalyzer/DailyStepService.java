@@ -256,26 +256,28 @@ public class DailyStepService extends Service implements SensorEventListener {
             /***If a change event is detected with step sensor, increase counter by one***/
             nbStep++;
             /***Save the event timestamp (initially in nanoseconds) and convert it to milliseconds, then calculate duration between 2 detected steps***/
-            long timestamp = sensorEvent.timestamp/1000000;
+            long timestamp = sensorEvent.timestamp / 1000000;
             if (moment != -1) {
                 delta = (timestamp - moment);
             }
             moment = timestamp;
-        }
-        /***Send the steps number with broadcastValue()***/
-        broadcastValue();
-        /***The lines are updated only when the time limit does not exceed a time threshold***/
-        if (delta < ParametersCollection.TIME_LIMIT_MS) {
-            lines += ParametersCollection.df2.format(Calendar.getInstance().getTime()) + "; " + delta + "\n ";
-        }
-        /***If user stops walking for TIME_LIMIT_MS, all counters are reset and a text file is created and uploaded to the server***/
-        else {
-            Date now = Calendar.getInstance().getTime();
-            createTextFile(ID, ParametersCollection.dfYear.format(now), ParametersCollection.dfMonth.format(now), ParametersCollection.dfDay.format(now), ParametersCollection.dfHour.format(now) , lines);
-            lines = "";
-            nbStep = 0;
-            moment = -1;
-            delta = 0;
+
+            //} correction du 15 octobre 2019 pour que l'écriture de fichiers ne concerne que le type.step.detector
+            /***Send the steps number with broadcastValue()***/
+            broadcastValue();
+            /***The lines are updated only when the time limit does not exceed a time threshold***/
+            if (delta < ParametersCollection.TIME_LIMIT_MS) {
+                lines += ParametersCollection.df2.format(Calendar.getInstance().getTime()) + "; " + delta + "\n ";
+            }
+            /***If user stops walking for TIME_LIMIT_MS, all counters are reset and a text file is created and uploaded to the server***/
+            else {
+                Date now = Calendar.getInstance().getTime();
+                createTextFile(ID, ParametersCollection.dfYear.format(now), ParametersCollection.dfMonth.format(now), ParametersCollection.dfDay.format(now), ParametersCollection.dfHour.format(now), lines);
+                lines = "";
+                nbStep = 0;
+                moment = -1;
+                delta = 0;
+            }
         }
     }
 
