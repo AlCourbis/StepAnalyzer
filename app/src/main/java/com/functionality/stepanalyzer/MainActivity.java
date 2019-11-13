@@ -29,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView Steps;
     private Button BtnDaily;
     private Button BtnInfo;
+    private Button btnUserAgreement;
 
     /***Button manipulation variables***/
     private boolean dailyTracker = false;
-    private String id = "NOT_INITIALIZED";
+    private String id = ParametersCollection.IDnotInitialized;
     private String btnText = "Start Daily Tracker";
     private int steps = 0;
 
@@ -128,10 +129,12 @@ public class MainActivity extends AppCompatActivity {
         ID = findViewById(R.id.id);
         Steps = findViewById(R.id.nbstep);
         BtnDaily = findViewById(R.id.btn_daily);
+        BtnDaily.setEnabled(false);
         BtnInfo = findViewById(R.id.btn_info);
+        btnUserAgreement = findViewById(R.id.btn_agree);
         Steps.setText("Number of steps :" + steps);
 
-        if (!id.equals("NOT_INITIALIZED"))
+        if (!id.equals(ParametersCollection.IDnotInitialized))
             ID.setText(id);
 
         /***Display tooltips before everything else***/
@@ -155,6 +158,10 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor preferencesEditor = mPreferences.edit();
                 preferencesEditor.putString("ID", id);
                 preferencesEditor.apply();
+                if (id.compareTo(ParametersCollection.IDnotInitialized) !=0 && !btnUserAgreement.isEnabled())
+                    BtnDaily.setEnabled(true);
+                else
+                    BtnDaily.setEnabled(false);
             }
         });
 
@@ -184,6 +191,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 displayTermOfUse();
+            }
+        });
+        btnUserAgreement.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (id.compareTo(ParametersCollection.IDnotInitialized) !=0)
+                    BtnDaily.setEnabled(true);
+                btnUserAgreement.setEnabled(false);
+                btnUserAgreement.setText("Agreement registered");
             }
         });
     }

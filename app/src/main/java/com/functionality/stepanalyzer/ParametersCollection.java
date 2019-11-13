@@ -3,7 +3,9 @@ package com.functionality.stepanalyzer;
 import java.text.SimpleDateFormat;
 
 public final class ParametersCollection {
-
+    /** For hecking ID not initialized
+     */
+    public static final String IDnotInitialized="";
     /**The Channel ID used for Foreground Task Notification Service. Used in DailyStepService.java**/
     public static final String CHANNEL_ID = "ForegroundServiceChannel";
 
@@ -33,6 +35,7 @@ public final class ParametersCollection {
             "Thèse en informatique\n" +
             "Doctorante : Marion Kissous\n" +
             "Réalisée sous la direction de Gérard Dray, Sophie Martin, Anne-Lise Courbis et Thomas Lambolais\n"+
+            "Financement : Region Occitanie\n" +
             "\n" +
             "Objectif de l’étude \n" +
             "\n" +
@@ -77,7 +80,7 @@ public final class ParametersCollection {
             "différentes communications telles que des congrès, soutenance de thèse, publications, conférences ou encore " +
             "colloques.\n" +
             "\n" +
-            "CONSENTEMENT ÉCLAIRÉ\n" +
+            "CONSENTEMENT ÉCLAIRÉ (validation à cocher sur la page principale de l'application)\n" +
             "\n" +
             "J’accepte de mon plein gré de participer à cette étude intitulée « Capteurs sensori-moteurs sur smartphone & " +
             "vie quotidienne », réalisée par Marion Kissous, Doctorante en 2nde année au LGI2P de l’IMT Mines Alès et du " +
