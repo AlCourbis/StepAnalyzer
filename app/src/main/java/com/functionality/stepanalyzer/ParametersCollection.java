@@ -30,7 +30,7 @@ public final class ParametersCollection {
     public static final String ACTION_CUSTOM_BROADCAST = BuildConfig.APPLICATION_ID + ".ACTION_CUSTOM_BROADCAST";
 
     /**Titles and Messages displayed in MainActivity's dialog**/
-    public static final String TOOLTIPS_TITLE = "Bienvenue dans l'application de détection de la marche !";
+    public static final String TOOLTIPS_TITLE = "Welcome to Step Analyzer !";
     public static final String TOOLTIPS_MESSAGE = "Capteurs sensori-moteurs sur smartphone et vie quotidienne\n"+
             "Thèse en informatique\n" +
             "Doctorante : Marion Kissous\n" +
