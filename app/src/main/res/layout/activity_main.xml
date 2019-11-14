@@ -51,22 +51,29 @@
             android:layout_width="97dp"
             android:layout_height="89dp"
             android:layout_weight="1"
-            android:src="@drawable/occitanielogo"/>
+            android:src="@drawable/occitanielogo" />
 
         <ImageView
 
             android:layout_width="46dp"
             android:layout_height="92dp"
             android:layout_weight="1"
-            android:src="@drawable/mineslogo"/>
+            android:src="@drawable/mineslogo" />
+
         <ImageView
 
             android:layout_width="97dp"
             android:layout_height="89dp"
             android:layout_weight="1"
-            android:src="@drawable/universitelogo"/>
+            android:src="@drawable/universitelogo" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Icons made by Freepik from www.flaticon.com" />
 
     <!--Button
         android:id="@+id/btn_6min"
